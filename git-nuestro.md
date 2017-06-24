@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *Git* nuestro que estas en los repos
 
 Comprimidos sean tus *commits*
@@ -10,13 +11,14 @@ Danos hoy nuestro *pull* de cada dia
 
 Perdona nuestros *conflictos*
 
-Como también perdonamos los de otros geeks
+Como también perdonamos los de otros geeks<br />
 
+<<<<<<< HEAD
 No nos dejes caer en *detached HEAD*
 
 y libranos de *SVN*
 
-git commit --amend
+<code>git commit --amend</code><br />
 
 
 
