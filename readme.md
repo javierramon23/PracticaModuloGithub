@@ -22,7 +22,7 @@ Permite eliminar el ultimo *commit*, añadiendo el parametro *--hard* los cambio
 
 `$ git reset --hard <id_commit>`
 
-`reflog` lista todos los **commits** que se han realizado en el repositorio, se puede encontrar el *id* del **commit** que hemos eliminado y a través de `reset` con el parametro *--hard* y este *id*, recuperarlo. 
+`git reflog` lista todos los **commits** por los que hemos ido pasando en el repositorio y el orden en el que se ha hecho, se puede encontrar el *id* del **commit** que hemos eliminado y a través de `git reset` con el parametro *--hard* y este *id*, recuperarlo. 
 
 **Pregunta 3:**
 
@@ -30,23 +30,23 @@ El `merge`del paso 13, ¿Causó algún conflicto?, ¿Por qué?:
 
 **Respuesta 3:**
 
-No, ya que en este caso la rama *styled* que absorbe a la rama *master* se encuentra por delante formando una lista y por lo tanto se puede decir que *styled* ya ha absorbido a *master* antes del `merge`. 
+No, ya que en este caso la rama *styled* que absorbe a la rama *master* se encuentra por delante formando una lista y por lo tanto se puede decir que *styled* ya ha absorbido a *master* antes del `merge`, *master* ya forma parte de *styled*, de ahi que **git** muestre el mensaje **Already up-to-date** . 
 
 **Pregunta 4:**
 
-El `merge`del paso 19, ¿Causó algún conflicto?, ¿Por qué?:
+El `merge` del paso 19, ¿Causó algún conflicto?, ¿Por qué?:
 
 **Respuesta 4:**
 
-En este caso SI, al querer absorber la rama *htmlyfi* por parte de *styled* git se da cuenta que se ha modificado el fichero en las dos ramas y es necesario corregirlo.   
+En este caso SI, al querer absorber la rama *htmlyfi* por parte de *styled* git se da cuenta que se ha modificado el mismo fichero, en las mismas lineas en las dos ramas y es necesario corregirlo.   
 
 **Pregunta 5:**
 
-El `merge`del paso 21, ¿Causó algún conflicto?, ¿Por qué?:
+El `merge` del paso 21, ¿Causó algún conflicto?, ¿Por qué?:
 
 **Respuesta 5:**
 
-No se han presentado conflictos, se ha realizazo un `merge` de tipo **Fast Forward** de manera que el puntero *master* se ha desplazado hasta el ultimo **commit** de la rama *styled*.
+No se han presentado conflictos, se ha realizado un `merge` de tipo **Fast Forward** ya que las ramas que intervienen en el `merge` forman una lista de manera que ha sido suficiente con que el puntero *master* se desplazase hasta el **commit** al que apunta el puntero de la rama *styled*.
 
 **Pregunta 6:**
 
@@ -57,6 +57,10 @@ No se han presentado conflictos, se ha realizazo un `merge` de tipo **Fast Forwa
 Se ha utilizado un único comando pero acompañado de varios parametros:
 
 `$ git log --graph --decorate --pretty=oneline`
+
+Hubiera sido posible también definir un *alias* para evitar tener que utilizar tal cantidad de parametros, basta con definirlo en la configuración de *git* de la siguiente forma:
+
+`git config alias.<nombre_alias> "comando_completo_a_ejecutar"`
 
 **Pregunta 7:**
 
@@ -72,7 +76,7 @@ Si podría serlo, ya que en este punto, *master* se encuentra un commit por deba
 
 **Respuesta 8:**
 
-Para deshacer el `merge` sin perder los cambios, utilizamos el comando `reset` que hemos utilizado en otras ocasiones pero esta vez sin el parámetro `--hard` para así poder conservar los cambios:
+Para deshacer el `merge` que acabamos de hacer, lo que implica deshacer el útlimo *commit* que se ha creado al hacer el `merge --no-ff'` no fast forward pero sin perder los cambios (manteniendo el titulo), utilizamos el comando `reset` que hemos utilizado en otras ocasiones pero esta vez sin el parámetro `--hard` para así poder conservar los cambios:
  
 `$ git reset HEAD~1`
 
@@ -82,7 +86,7 @@ Para deshacer el `merge` sin perder los cambios, utilizamos el comando `reset` q
 
 **Respuesta 9:**
 
-Para descartar los cambiso del *Working Copy* utilizamos de nuevo el comando `checkout`:
+Para descartar los cambios del *Working Copy* utilizamos el comando `checkout`:
 
 `$ git checkout -- git-nuestro.md`
 
@@ -94,7 +98,7 @@ Para descartar los cambiso del *Working Copy* utilizamos de nuevo el comando `ch
 
 Para eliminar la rama *tittle* utilizamos el comando:
 
-`$git branch -D tittle`
+`$git branch -D title`
 
 **Pregunta 11:**
 
@@ -106,7 +110,11 @@ Utilizamos `reflog` para acceder al listado de todos los *commits* que se han id
 
 `$git reflog`
 
-`$ git reset --hard c4110b9`
+`$ git reset --hard b27cbe2`
+
+Se puede ver que se ha realizado de forma correcta puesto que git nos muestra:
+
+**Merge branch 'title' con la rama master**, que es el mensaje que aparecia cuando se ha realizado el `merge` no fast forward.
 
 **Pregunta 12:**
 
@@ -114,11 +122,11 @@ Utilizamos `reflog` para acceder al listado de todos los *commits* que se han id
 
 **Respuesta 12:**
 
-El proceso es igual que en el punto anterior, `reflog` para acceder al listado de todos los *commits* que se han ido realizando, seleccionamos el *id* del que corresponde al *commit* inicial, que ademas aparece marcado en el reflog como *(initial)* y ejecutamos el comando `reset`como se muestra a continuación:
+Para volver al *commit* inicial, sin perder los cambios (el enunciado dice volver al **commit inicial**, no al **estado inicial**), utilizamos `git reflog` para acceder al listado de los *commits* por los que hemos ido pasando, seleccionamos el *id* que corresponde al *commit* inicial, que ademas aparece marcado en el reflog como *(initial)* y ejecutamos el comando `git checkout`, tambien podríamos haber utilizado el comando `git log` para localizar el *id* del *commit* inicial:
 
 `$git reflog`
 
-`$ git reset --hard 9ba19ad`
+`$ git checkout 75ee313`
 
 **Pregunta 13:**
 
@@ -126,10 +134,10 @@ El proceso es igual que en el punto anterior, `reflog` para acceder al listado d
 
 **Respuesta 13:**
 
-Volvemos a utilizar los mismos comandos de nuevo, `reflog` para localizar el *commit* y `reset` para volver a el:
+Utilizamos `reflog` para acceder al listado de todos los *commits* que se han ido realizando, seleccionamos el *id* del que corresponde al `merge` del paso 26 y ejecutamos el comando `reset`como se muestra a continuación junto con el parámetro `--hard`:
 
 `$git reflog`
 
-`$ git reset --hard af14344`
+`$ git reset --hard 1b7ac1c`
  
  
