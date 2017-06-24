@@ -1,0 +1,18 @@
+# Compilados y ejecutables
+*.class
+*.dll
+*.exe
+
+# Archivos comprimidos
+*.dmg
+*.rar
+*.zip
+
+# Logs y BBDD
+*.log
+*.sql
+
+# Archivos generados por SSOO
+*.DS_Store
+Thumbs.db
+._*
