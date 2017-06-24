@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+# El rezo Geek de Git
+
 *Git* nuestro que estas en los repos
 
 Comprimidos sean tus *commits*
@@ -13,7 +14,6 @@ Perdona nuestros *conflictos*
 
 Como también perdonamos los de otros geeks<br />
 
-<<<<<<< HEAD
 No nos dejes caer en *detached HEAD*
 
 y libranos de *SVN*
